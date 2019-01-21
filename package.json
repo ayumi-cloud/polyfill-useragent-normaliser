@@ -1,0 +1,14 @@
+{
+  "name": "@financial-times/polyfill-useragent-normaliser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/normalise-user-agent.js",
+  "scripts": {
+    "start": "node compilers/fastly.js && node compilers/node.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@financial-times/useragent_parser": "1.0.2"
+  }
+}
