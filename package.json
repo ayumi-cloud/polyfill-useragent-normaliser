@@ -4,11 +4,17 @@
   "description": "",
   "main": "lib/normalise-user-agent.js",
   "scripts": {
-    "start": "node compilers/fastly.js && node compilers/node.js"
+    "start": "node compilers/fastly.js && node compilers/node.js",
+    "test": "mocha --bail --recursive test/integration/*.test.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@financial-times/useragent_parser": "1.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "proclaim": "^3.6.0",
+    "supertest": "^3.4.2"
   }
 }

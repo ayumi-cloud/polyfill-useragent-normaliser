@@ -8,7 +8,9 @@ const version = JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json
 let file = `
 "use strict";
 
-module.exports = function UA (uaString){
+const useragent = require("@financial-times/useragent_parser");
+
+function UA (uaString){
   let normalized;
   if (!uaString) {
     this.ua.family = "other";
@@ -98,6 +100,14 @@ file +=`
 
 file +=`
 
+UA.prototype.getFamily = function() {
+	return this.ua.family;
+};
+
+UA.prototype.getVersion = function() {
+	return this.version;
+};
+
 UA.prototype.satisfies = function(range) {
 	return semver.satisfies(this.version, range);
 }
@@ -122,10 +132,12 @@ UA.normalize = function(uaString) {
 UA.getBaselines = function() {
 	return ${JSON.stringify(data.baselineVersions, undefined, 4)};
 };
+
+module.exports = UA;
 `;
 
 fs.writeFileSync(
   path.join(__dirname, "../lib/normalise-user-agent.js"),
-  file ,
+  file,
   "utf8"
 );
