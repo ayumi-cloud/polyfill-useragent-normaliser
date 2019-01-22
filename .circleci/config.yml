@@ -1,0 +1,60 @@
+
+# Do not modify this file directly, it is built by ./tasks/node/build-circleci-config.js.
+version: 2.1
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run lint
+  unit_tests:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test:unit
+  deploy_staging:
+    docker:
+      - image: "circleci/node:10"
+    steps:
+      - "checkout"
+      - run: "npm ci"
+      - run: "sudo ~/project/.circleci/install_terraform.sh"
+      - run: terraform init fastly/terraform/
+      - run: terraform import -config="fastly/terraform" fastly_service_v1.app $FASTLY_SERVICE_ID
+      - run: terraform apply --auto-approve -var name=qa.polyfill.io -var domain=qa.polyfill.io fastly/terraform/
+  integration_tests:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test:integration
+  publish_to_npm:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: npm ci
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: npm publish
+workflows:
+  test:
+    jobs:
+      - lint
+      - unit_tests
+      - deploy_to_fastly:
+          requires:
+            - lint
+            - unit_tests
+      - integration_tests:
+          requires:
+            - deploy_to_fastly
+      - publish_to_npm
+          requires:
+            - integration_tests

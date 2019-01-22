@@ -1,6 +1,6 @@
 {
     "//": "Regex to check for an already normalised user-agent",
-    "isNormalized": "/^(\\w+)\/(\\d+)(?:\\.(\\d+)(?:\\.(\\d+))?)?$/",
+    "isNormalized": "/^(\\w+)\\/(\\d+)(?:\\.(\\d+)(?:\\.(\\d+))?)?$/i",
 
     "//": "The lowest version of each browser which has >=0.1% of global usage according to https://caniuse.com/usage-table",
     "baselineVersions": {
@@ -25,19 +25,19 @@
     "normalisations": [
 		{
             "reason": "Chrome and Opera on iOS uses a UIWebView of the underlying platform to render content. By stripping the CriOS or OPiOS strings, the useragent parser will alias the user agent to ios_saf for the UIWebView, which is closer to the actual renderer",
-            "regex": "/((CriOS|OPiOS)\/(\\d+)\\.(\\d+)\\.(\\d+)\\.(\\d+)|(FxiOS\/(\\d+)\\.(\\d+)))/"
+            "regex": "/((CriOS|OPiOS)\\/(\\d+)\\.(\\d+)\\.(\\d+)\\.(\\d+)|(FxiOS\\/(\\d+)\\.(\\d+)))/"
         },
         {
 		"reason": "Vivaldi browser is recognised by UA module but is actually identical to Chrome, so the best way to get accurate targeting is to remove the vivaldi token from the UA",
-		"regex" :"/ vivaldi\/[\\d\\.]+\\d+/i"
+		"regex" :"/ vivaldi\\/[\\d\\.]+\\d+/i"
         },
         {
 		"reason": "Facebook in-app browser `[FBAN/.....]` or `[FB_IAB/.....]` (see https://github.com/Financial-Times/polyfill-service/issues/990)",
-		"regex": "/ \\[(FB_IAB|FBAN|FBIOS|FB4A)\/[^\\]]+\\]/i"
+		"regex": "/ \\[(FB_IAB|FBAN|FBIOS|FB4A)\\/[^\\]]+\\]/i"
         },
         {
 		"reason": "Electron/X.Y.Z` (see https://github.com/Financial-Times/polyfill-service/issues/1129)",
-        "regex": "/ Electron\/[\\d\\.]+\\d+/i"
+        "regex": "/ Electron\\/[\\d\\.]+\\d+/i"
         }
     ],
 
@@ -69,6 +69,7 @@
         "opera mobile": "op_mob",
         "opera mini": "op_mini",
 
+        "chrome mobile webview": "chrome",
         "chrome mobile": "chrome",
         "chrome frame": "chrome",
         "chromium": "chrome",

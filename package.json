@@ -3,17 +3,27 @@
   "version": "1.0.0",
   "description": "",
   "main": "lib/normalise-user-agent.js",
+  "engines": {
+    "node": ">=8"
+  },
   "scripts": {
-    "start": "node compilers/fastly.js && node compilers/node.js",
-    "test": "mocha --bail --recursive test/integration/*.test.js"
+    "lint": "eslint .",
+    "fix": "eslint . --fix",
+    "build": "node compilers/fastly.js && node compilers/node.js",
+    "test": "mocha --bail --recursive test/**/*.test.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@financial-times/useragent_parser": "1.0.2"
+    "@financial-times/useragent_parser": "1.0.2",
+    "semver": "^5.6.0"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
     "mocha": "^5.2.0",
+    "prettier": "^1.13.7",
     "proclaim": "^3.6.0",
     "supertest": "^3.4.2"
   }
