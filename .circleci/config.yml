@@ -55,6 +55,6 @@ workflows:
       - integration_tests:
           requires:
             - deploy_to_fastly
-      - publish_to_npm
+      - publish_to_npm:
           requires:
             - integration_tests
