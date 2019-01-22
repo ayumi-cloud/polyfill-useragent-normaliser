@@ -26,7 +26,7 @@ jobs:
       - run: "sudo ~/project/.circleci/install_terraform.sh"
       - run: terraform init fastly/terraform/
       - run: terraform import -config="fastly/terraform" fastly_service_v1.app $FASTLY_SERVICE_ID
-      - run: terraform apply --auto-approve -var name=qa.polyfill.io -var domain=qa.polyfill.io fastly/terraform/
+      - run: terraform apply --auto-approve fastly/terraform/
   integration_tests:
     docker:
       - image: circleci/node:10

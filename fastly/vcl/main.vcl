@@ -13,6 +13,7 @@ sub vcl_error {
         set obj.http.normalized_user_agent_family = req.http.normalized_user_agent_family;
         set obj.http.normalized_user_agent_major_version = req.http.normalized_user_agent_major_version;
         set obj.http.normalized_user_agent_minor_version = req.http.normalized_user_agent_minor_version;
+        set obj.http.normalized_user_agent_patch_version = req.http.normalized_user_agent_patch_version;
 		set obj.http.Normalized-User-Agent = req.http.Normalized-User-Agent;
 		synthetic req.http.Normalized-User-Agent;
 		return (deliver);
