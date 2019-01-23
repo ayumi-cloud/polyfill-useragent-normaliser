@@ -1,6 +1,6 @@
 {
     "//": "Regex to check for an already normalised user-agent",
-    "isNormalized": "/^(\\w+)\\/(\\d+)(?:\\.(\\d+)(?:\\.(\\d+))?)?$/i",
+    "isNormalized": "/(?i)^(\\w+)\\/(\\d+)(?:\\.(\\d+)(?:\\.(\\d+))?)?$/",
 
     "//": "The lowest version of each browser which has >=0.1% of global usage according to https://caniuse.com/usage-table",
     "baselineVersions": {
@@ -29,15 +29,15 @@
         },
         {
 		"reason": "Vivaldi browser is recognised by UA module but is actually identical to Chrome, so the best way to get accurate targeting is to remove the vivaldi token from the UA",
-		"regex" :"/ vivaldi\\/[\\d\\.]+\\d+/i"
+		"regex" :"/(?i) vivaldi\\/[\\d\\.]+\\d+/"
         },
         {
 		"reason": "Facebook in-app browser `[FBAN/.....]` or `[FB_IAB/.....]` (see https://github.com/Financial-Times/polyfill-service/issues/990)",
-		"regex": "/ \\[(FB_IAB|FBAN|FBIOS|FB4A)\\/[^\\]]+\\]/i"
+		"regex": "/(?i) \\[(FB_IAB|FBAN|FBIOS|FB4A)\\/[^\\]]+\\]/"
         },
         {
 		"reason": "Electron/X.Y.Z` (see https://github.com/Financial-Times/polyfill-service/issues/1129)",
-        "regex": "/ Electron\\/[\\d\\.]+\\d+/i"
+        "regex": "/(?i) Electron\\/[\\d\\.]+\\d+/"
         }
     ],
 

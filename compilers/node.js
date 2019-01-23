@@ -6,6 +6,13 @@ const data = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../data.json"), "utf8")
 );
 
+function convertCaseInsensitivePCREToFlag(regex) {
+  if (regex.startsWith("/(?i)")) {
+    return regex.replace("(?i)", "") + "i";
+  } else {
+    return regex;
+  }
+}
 let file = `
 "use strict";
 
@@ -20,7 +27,9 @@ function UA (uaString){
         this.ua.minor = "0";
         this.ua.patch = "0";
     } else {
-        if (normalized = uaString.match(${data.isNormalized})) {
+        if (normalized = uaString.match(${convertCaseInsensitivePCREToFlag(
+          data.isNormalized
+        )})) {
             this.ua = {
                 family: normalized[1].toLowerCase(),
                 major: normalized[2],
@@ -33,7 +42,9 @@ function UA (uaString){
 for (const { reason, regex } of data.normalisations) {
   let s = "";
   s += `\n\t\t// ${reason}`;
-  s += `\n\t\tuaString = uaString.replace(${regex}, "");\n`;
+  s += `\n\t\tuaString = uaString.replace(${convertCaseInsensitivePCREToFlag(
+    regex
+  )}, "");\n`;
   file += s;
 }
 

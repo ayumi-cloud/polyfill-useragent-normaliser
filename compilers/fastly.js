@@ -13,23 +13,35 @@ const ua_parser_vcl = fs.readFileSync(
   "utf8"
 );
 
+// Fastly uses strings as regex and does not want it to start or end with /
+function removeRegexLiteralMarkers(regex) {
+  return regex.substring(1, regex.length - 1);
+}
 let file = `${ua_parser_vcl}
 
 sub normalise_user_agent_${version} {
   if (!req.http.User-Agent) {
-    set req.http.Normalized-User-Agent = "other/0.0.0";
-  } elsif (req.http.User-Agent ~ {"${data.isNormalized}"}) {
-    set req.http.normalized_user_agent_family = std.tolower(re.group.1);
-    set req.http.normalized_user_agent_major_version = re.group.2;
-    set req.http.normalized_user_agent_minor_version = re.group.3;
-    set req.http.Normalized-User-Agent = req.http.normalized_user_agent_family "/"  req.http.normalized_user_agent_major_version "." req.http.normalized_user_agent_minor_version "." req.http.normalized_user_agent_patch_version;
+    set req.http.normalized_user_agent_family = "other";
+    set req.http.normalized_user_agent_major_version = "0";
+    set req.http.normalized_user_agent_minor_version = "0";
+    set req.http.normalized_user_agent_patch_version = "0";
   } else {
+    if (req.http.User-Agent ~ {"${removeRegexLiteralMarkers(
+      data.isNormalized
+    )}"}) {
+      set req.http.normalized_user_agent_family = std.tolower(re.group.1);
+      set req.http.normalized_user_agent_major_version = re.group.2;
+      set req.http.normalized_user_agent_minor_version = if(re.group.3, std.strtol(re.group.3, 10), "0");
+      set req.http.normalized_user_agent_patch_version = "0";
+    } else {
 `;
 // 1. Add the normalisations
 for (const { reason, regex } of data.normalisations) {
   let s = "";
   s += `\n\t\t# ${reason}`;
-  s += `\n\t\tset req.http.User-Agent = regsub(req.http.User-Agent, {"${regex}"}, "");\n`;
+  s += `\n\t\tset req.http.User-Agent = regsub(req.http.User-Agent, {"${removeRegexLiteralMarkers(
+    regex
+  )}"}, "");\n`;
   file += s;
 }
 
@@ -40,15 +52,14 @@ file += `
         # Clone the original values for later modification. This helps when debugging as it let's us see what the useragent_parser function returned.
         set req.http.normalized_user_agent_family = req.http.useragent_parser_family;
         set req.http.normalized_user_agent_major_version = req.http.useragent_parser_major;
-        set req.http.normalized_user_agent_minor_version = req.http.useragent_parser_minor;
-        set req.http.normalized_user_agent_patch_version = req.http.useragent_parser_patch;
+        set req.http.normalized_user_agent_minor_version = if(req.http.useragent_parser_minor != "", std.strtol(req.http.useragent_parser_minor, 10), "0");
 `;
 
 // For improved CDN cache performance, remove the patch version.  There are few cases in which a patch release drops the requirement for a polyfill, but if so, the polyfill can simply be served unnecessarily to the patch versions that contain the fix, and we can stop targeting at the next minor release.
 file += `\n\t\tset req.http.normalized_user_agent_patch_version = "0";\n`;
 
 // 3. Aliases
-file += `\n\t\tset req.http.normalized_user_agent_family = std.tolower(req.http.useragent_parser_family);\n`;
+file += `\n\t\tset req.http.normalized_user_agent_family = std.tolower(req.http.useragent_parser_family);\n\t}`;
 for (const [family, alias] of Object.entries(data.aliases)) {
   if (typeof alias === "string") {
     file += `\n\t\tif (req.http.normalized_user_agent_family == "${family}") {
@@ -58,6 +69,7 @@ for (const [family, alias] of Object.entries(data.aliases)) {
     file += `\n\t\tif (req.http.normalized_user_agent_family == "${family}") {
             set req.http.normalized_user_agent_family = "${alias[0]}";
             set req.http.normalized_user_agent_major_version = "${alias[1]}";
+            set req.http.normalized_user_agent_minor_version = "0";
         }`;
   } else if (typeof alias === "object") {
     file += `\n\t\tif (req.http.normalized_user_agent_family == "${family}") {`;
@@ -73,6 +85,7 @@ for (const [family, alias] of Object.entries(data.aliases)) {
                 set req.http.normalized_user_agent_major_version = "${
                   replacement[1]
                 }";
+                set req.http.normalized_user_agent_minor_version = "0";
             }`;
     }
     file += `\n\t\t}`;
@@ -80,32 +93,30 @@ for (const [family, alias] of Object.entries(data.aliases)) {
 }
 
 // 4. Check if browser and version are in the baseline supported browser versions
+file += `\n\t\tset req.http.normalized_user_agent_temp_version = req.http.normalized_user_agent_major_version req.http.normalized_user_agent_minor_version;`;
+file += `\n\t\tif (\n            !req.http.Host`;
 for (const [family, range] of Object.entries(data.baselineVersions)) {
   if (range === "*") {
-    file += `\n\t\tif (req.http.normalized_user_agent_family == "${family}") {
-            set req.http.Normalized-User-Agent = req.http.normalized_user_agent_family "/"  req.http.normalized_user_agent_major_version "." req.http.normalized_user_agent_minor_version "." req.http.normalized_user_agent_patch_version;
-        }`;
+    file += ` || \n            (req.http.normalized_user_agent_family == "${family}")`;
   } else {
     if (Number.isInteger(Number(range))) {
-      file += `\n\t\tif (req.http.normalized_user_agent_family == "${family}" && std.atoi(req.http.normalized_user_agent_major_version) >= ${range}) {
-            set req.http.Normalized-User-Agent = req.http.normalized_user_agent_family "/"  req.http.normalized_user_agent_major_version "." req.http.normalized_user_agent_minor_version "." req.http.normalized_user_agent_patch_version;
-        }`;
+      file += ` || \n            (req.http.normalized_user_agent_family == "${family}" && std.atoi(req.http.normalized_user_agent_major_version) >= ${range})`;
     } else {
       const [major, minor] = range.split(".");
-      file += `\n\t\tif (req.http.normalized_user_agent_family == "${family}" && std.atoi(req.http.normalized_user_agent_major_version) >= ${major} && std.atoi(req.http.normalized_user_agent_minor_version) >= ${minor}) {
-            set req.http.Normalized-User-Agent = req.http.normalized_user_agent_family "/"  req.http.normalized_user_agent_major_version "." req.http.normalized_user_agent_minor_version "." req.http.normalized_user_agent_patch_version;
-        }`;
+      file += ` || \n            (req.http.normalized_user_agent_family == "${family}" && std.atoi(req.http.normalized_user_agent_temp_version) >= ${major +
+        minor})`;
     }
   }
 }
-file += `\n\t\tif (!req.http.Normalized-User-Agent) {
+file += `\n		) {} else {
             set req.http.normalized_user_agent_family = "other";
             set req.http.normalized_user_agent_major_version = "0";
             set req.http.normalized_user_agent_minor_version = "0";
-            set req.http.Normalized-User-Agent = req.http.normalized_user_agent_family "/"  req.http.normalized_user_agent_major_version "." req.http.normalized_user_agent_minor_version "." req.http.normalized_user_agent_patch_version;
         }`;
+file += `\n\t\tunset req.http.normalized_user_agent_temp_version;`;
 file += `
     }
+    set req.http.Normalized-User-Agent = req.http.normalized_user_agent_family "/"  req.http.normalized_user_agent_major_version "." req.http.normalized_user_agent_minor_version "." req.http.normalized_user_agent_patch_version;
 }`;
 
 fs.writeFileSync(
