@@ -46,13 +46,33 @@ jobs:
 workflows:
   test:
     jobs:
-      - lint
-      - unit_tests
+      - lint:
+          filters:
+            tags:
+              ignore: /^v.*/
+            branches:
+              ignore: master
+      - unit_tests:
+          filters:
+            tags:
+              ignore: /^v.*/
+            branches:
+              ignore: master
       - deploy_to_fastly:
+          filters:
+            tags:
+              ignore: /^v.*/
+            branches:
+              ignore: master
           requires:
             - lint
             - unit_tests
       - integration_tests:
+          filters:
+            tags:
+              ignore: /^v.*/
+            branches:
+              ignore: master
           requires:
             - deploy_to_fastly
       - publish_to_npm:
