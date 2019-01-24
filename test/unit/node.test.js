@@ -24,6 +24,17 @@ describe("lib/UA", function() {
     proclaim.isFunction(UA.getBaselines);
   });
 
+  describe("UA()", () => {
+    it("returns other ua", () => {
+      proclaim.deepStrictEqual(new UA().ua, {
+        family: "other",
+        major: "0",
+        minor: "0",
+        patch: "0"
+      });
+    });
+  });
+
   describe('UA("uastring")', () => {
     describe("removes iOS webview browsers from uastring", () => {
       it("firefox for iOS", () => {
