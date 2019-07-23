@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.4.1...v1.4.2) (2019-07-23)
+
+
+### Bug Fixes
+
+* add a description to package.json ([c934413](https://github.com/Financial-Times/polyfill-useragent-normaliser/commit/c934413))
+
 ## [1.4.1](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.4.0...v1.4.1) (2019-07-23)
 
 
