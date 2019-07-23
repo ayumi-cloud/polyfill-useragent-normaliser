@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.4.0...v1.4.1) (2019-07-23)
+
+
+### Bug Fixes
+
+* Automatically build new copy of library when the version changes ([78eb53b](https://github.com/Financial-Times/polyfill-useragent-normaliser/commit/78eb53b))
+
 # [1.4.0](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.3.0...v1.4.0) (2019-07-19)
 
 
