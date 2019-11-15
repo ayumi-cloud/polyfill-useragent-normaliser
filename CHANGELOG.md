@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.4.2...v1.5.0) (2019-11-15)
+
+
+### Features
+
+* **alias:** chromium-edge is now chrome ([3ae1eaf](https://github.com/Financial-Times/polyfill-useragent-normaliser/commit/3ae1eaf))
+
 ## [1.4.2](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.4.1...v1.4.2) (2019-07-23)
 
 
