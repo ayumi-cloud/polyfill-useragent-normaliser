@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.5.0...v1.5.1) (2020-01-13)
+
+
+### Bug Fixes
+
+* Ensure useragent family name is checked for every alias ([54ae910](https://github.com/Financial-Times/polyfill-useragent-normaliser/commit/54ae910))
+
 # [1.5.0](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.4.2...v1.5.0) (2019-11-15)
 
 
