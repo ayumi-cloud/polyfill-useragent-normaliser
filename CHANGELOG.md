@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.5.1...v1.6.0) (2020-01-13)
+
+
+### Features
+
+* **alias:** Continue mapping opera to chrome ([db37102](https://github.com/Financial-Times/polyfill-useragent-normaliser/commit/db37102))
+
 ## [1.5.1](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.5.0...v1.5.1) (2020-01-13)
 
 
