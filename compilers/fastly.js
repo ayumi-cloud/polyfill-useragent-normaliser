@@ -76,9 +76,9 @@ for (const [family, alias] of Object.entries(data.aliases)) {
     for (const [range, replacement] of Object.entries(alias)) {
       const [major, minor] = range.split(".");
       if (minor !== undefined) {
-        file += `\n\t\t\tif (req.http.normalized_user_agent_major_version == "${major}" && req.http.normalized_user_agent_minor_version == "${minor}") {`;
+        file += `\n\t\t\tif (req.http.normalized_user_agent_family == "${family}" && req.http.normalized_user_agent_major_version == "${major}" && req.http.normalized_user_agent_minor_version == "${minor}") {`;
       } else {
-        file += `\n\t\t\tif (req.http.normalized_user_agent_major_version == "${major}") {`;
+        file += `\n\t\t\tif (req.http.normalized_user_agent_family == "${family}" && req.http.normalized_user_agent_major_version == "${major}") {`;
       }
       file += `
                 set req.http.normalized_user_agent_family = "${replacement[0]}";

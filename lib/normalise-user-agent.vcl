@@ -1374,7 +1374,7 @@ sub normalise_user_agent_1_5_0 {
             set req.http.normalized_user_agent_family = "edge_mob";
 		}
 		if (req.http.normalized_user_agent_family == "uc browser") {
-			if (req.http.normalized_user_agent_major_version == "9" && req.http.normalized_user_agent_minor_version == "9") {
+			if (req.http.normalized_user_agent_family == "uc browser" && req.http.normalized_user_agent_major_version == "9" && req.http.normalized_user_agent_minor_version == "9") {
                 set req.http.normalized_user_agent_family = "ie";
                 set req.http.normalized_user_agent_major_version = "10";
                 set req.http.normalized_user_agent_minor_version = "0";
@@ -1407,149 +1407,149 @@ sub normalise_user_agent_1_5_0 {
             set req.http.normalized_user_agent_minor_version = "0";
         }
 		if (req.http.normalized_user_agent_family == "opera") {
-			if (req.http.normalized_user_agent_major_version == "20") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "20") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "33";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "21") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "21") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "34";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "22") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "22") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "35";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "23") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "23") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "36";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "24") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "24") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "37";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "25") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "25") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "38";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "26") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "26") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "39";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "27") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "27") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "40";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "28") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "28") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "41";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "29") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "29") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "42";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "30") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "30") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "43";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "31") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "31") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "44";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "32") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "32") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "45";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "33") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "33") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "46";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "34") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "34") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "47";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "35") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "35") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "48";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "36") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "36") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "49";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "37") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "37") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "50";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "38") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "38") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "51";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "39") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "39") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "52";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "40") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "40") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "53";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "41") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "41") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "54";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "42") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "42") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "55";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "43") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "43") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "56";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "44") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "44") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "57";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "45") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "45") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "58";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "46") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "46") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "59";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
-			if (req.http.normalized_user_agent_major_version == "47") {
+			if (req.http.normalized_user_agent_family == "opera" && req.http.normalized_user_agent_major_version == "47") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "60";
                 set req.http.normalized_user_agent_minor_version = "0";
             }
 		}
 		if (req.http.normalized_user_agent_family == "googlebot") {
-			if (req.http.normalized_user_agent_major_version == "2" && req.http.normalized_user_agent_minor_version == "1") {
+			if (req.http.normalized_user_agent_family == "googlebot" && req.http.normalized_user_agent_major_version == "2" && req.http.normalized_user_agent_minor_version == "1") {
                 set req.http.normalized_user_agent_family = "chrome";
                 set req.http.normalized_user_agent_major_version = "41";
                 set req.http.normalized_user_agent_minor_version = "0";

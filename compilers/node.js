@@ -75,9 +75,9 @@ for (const [family, alias] of Object.entries(data.aliases)) {
     for (const [range, replacement] of Object.entries(alias)) {
       const [major, minor] = range.split(".");
       if (minor !== undefined) {
-        file += `\n\t\t\tif (this.ua.major === "${major}" && this.ua.minor === "${minor}") {`;
+        file += `\n\t\t\tif (this.ua.family === "${family}" && this.ua.major === "${major}" && this.ua.minor === "${minor}") {`;
       } else {
-        file += `\n\t\t\tif (this.ua.major === "${major}") {`;
+        file += `\n\t\t\tif (this.ua.family === "${family}" && this.ua.major === "${major}") {`;
       }
       file += `
                 this.ua.family = "${replacement[0]}";
