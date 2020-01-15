@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.6.2...v1.6.3) (2020-01-15)
+
+
+### Bug Fixes
+
+* **deps:** bump semver from 5.6.0 to 7.1.1 ([42cae2c](https://github.com/Financial-Times/polyfill-useragent-normaliser/commit/42cae2cf5e2b854e89c50bdc2a0c680d9f5ae698))
+
 ## [1.6.2](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.6.1...v1.6.2) (2020-01-15)
 
 
