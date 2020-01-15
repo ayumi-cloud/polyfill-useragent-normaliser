@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.6.1...v1.6.2) (2020-01-15)
+
+
+### Bug Fixes
+
+* **deps:** bump @financial-times/useragent_parser from 1.2.1 to 1.4.1 ([bfde311](https://github.com/Financial-Times/polyfill-useragent-normaliser/commit/bfde3111fc821b6e5eb5660ad67640e8ee9e7058))
+
 ## [1.6.1](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.6.0...v1.6.1) (2020-01-15)
 
 
