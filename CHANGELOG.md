@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.6.0...v1.6.1) (2020-01-15)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump npm from 6.10.1 to 6.13.6 ([f88e774](https://github.com/Financial-Times/polyfill-useragent-normaliser/commit/f88e7743fef97731cd23719b00c8a44e2cd66304))
+
 # [1.6.0](https://github.com/Financial-Times/polyfill-useragent-normaliser/compare/v1.5.1...v1.6.0) (2020-01-13)
 
 
